@@ -4,8 +4,10 @@ import React, { Component } from 'react';
 class Palette extends Component {
     render() {
         return (
-            <div>
-                <h1>Palette</h1>
+            <div className="Palette">
+                {/* Navbar goes here */}
+                <div className="Palette-colors"></div>
+                {/* footer here */}
             </div>
         )
     }
