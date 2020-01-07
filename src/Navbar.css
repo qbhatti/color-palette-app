@@ -53,5 +53,9 @@
     width: 13px;
     height: 13px;
     margin-top: -3px;
-    
+}
+
+.Navbar-select-continer{
+    margin-left: auto;
+    margin-right: 1rem;
 }
