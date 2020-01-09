@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
+import { Link } from 'react-router-dom';
 
 const styles = {
     root: {
@@ -33,11 +34,11 @@ const styles = {
 };
 
 function MiniPalette(props) {
-    const { classes, paletteName, emoji } = props;
+    const { classes, paletteName, emoji, id } = props;
     return (
         <div className={classes.root}>
             <div className={classes.colors}></div>
-            <h5 className={classes.title}>{paletteName} <span className={classes.emoji}>{emoji}</span></h5>
+            <Link to={`/palette/${id}`}><h5 className={classes.title}>{paletteName} <span className={classes.emoji}>{emoji}</span></h5></Link>
         </div>
     )
 }
