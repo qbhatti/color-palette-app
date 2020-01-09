@@ -1,51 +1,58 @@
-import React, { Component } from 'react';
-import ColorBox from './ColorBox';
-import Navbar from './Navbar';
-import './Palette.css';
-
+import React, { Component } from "react";
+import ColorBox from "./ColorBox";
+import Navbar from "./Navbar";
+import "./Palette.css";
 
 class Palette extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            level: 500,
-            format: "hex"
-        };
+  constructor(props) {
+    super(props);
+    this.state = {
+      level: 500,
+      format: "hex"
+    };
 
-        this.changeLevel = this.changeLevel.bind(this);
-        this.changeFormat = this.changeFormat.bind(this);
-    }
+    this.changeLevel = this.changeLevel.bind(this);
+    this.changeFormat = this.changeFormat.bind(this);
+  }
 
-    changeLevel(level) {
-        this.setState({ level: level });
-    }
+  changeLevel(level) {
+    this.setState({ level: level });
+  }
 
-    changeFormat(format) {
-        this.setState({ format: format });
-    }
+  changeFormat(format) {
+    this.setState({ format: format });
+  }
 
-    render() {
-        const { colors, paletteName, emoji } = this.props.palette;
-        const { level, format } = this.state;
+  render() {
+    const { colors, paletteName, emoji, id } = this.props.palette;
+    const { level, format } = this.state;
 
-        const colorBoxes = colors[level].map(color => <ColorBox background={color[format]} name={color.name} key={color.id} />);
+    const colorBoxes = colors[level].map(color => (
+      <ColorBox
+        background={color[format]}
+        name={color.name}
+        key={color.id}
+        moreUrl={`/palette/${id}/${color.id}`}
+      />
+    ));
 
-        return (
-            <div className="Palette">
+    return (
+      <div className="Palette">
+        <Navbar
+          level={level}
+          changeLevel={this.changeLevel}
+          changeFormat={this.changeFormat}
+        />
 
-                <Navbar level={level} changeLevel={this.changeLevel} changeFormat={this.changeFormat} />
+        <div className="Palette-colors">{colorBoxes}</div>
 
-                <div className="Palette-colors">
-                    {colorBoxes}
-                </div>
-
-                <footer className="Palette-footer">
-                    {paletteName}
-                    <span className="Palette-emoji">{emoji}</span>
-                </footer>
-            </div>
-        )
-    }
+        <footer className="Palette-footer">
+          {paletteName}
+          <span className="Palette-emoji">{emoji}</span>
+        </footer>
+      </div>
+    );
+  }
 }
 
 export default Palette;
