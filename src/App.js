@@ -8,6 +8,7 @@ import generatePalette from "./colorHelpers";
 
 class App extends Component {
   findPalette(id) {
+    //returns a single palette matching given id of different colors
     return seedColors.find(function(palette) {
       return palette.id === id;
     });
@@ -15,6 +16,18 @@ class App extends Component {
   render() {
     return (
       <Switch>
+        <Route
+          exact
+          path="/palette/:paletteId/:colorId"
+          render={routeProps => (
+            <SingleColorPalette
+              colorId={routeProps.match.params.colorId}
+              palette={generatePalette(
+                this.findPalette(routeProps.match.params.paletteId)
+              )}
+            />
+          )}
+        />
         <Route
           exact
           path="/"
@@ -32,12 +45,6 @@ class App extends Component {
               )}
             />
           )}
-        />
-
-        <Route
-          exact
-          path="/palette/:paletteId/:colorId"
-          render={() => <SingleColorPalette />}
         />
       </Switch>
     );
