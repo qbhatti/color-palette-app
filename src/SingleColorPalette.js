@@ -41,7 +41,7 @@ export default class SingleColorPalette extends Component {
         name={shade.name}
         background={shade[this.state.format]}
         key={shade.name}
-        showMoreUrl={false}
+        showingFullPalette={false}
       />
     ));
 
