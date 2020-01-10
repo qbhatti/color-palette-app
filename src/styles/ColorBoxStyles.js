@@ -13,16 +13,15 @@ export default {
       opacity: "1"
     }
   },
-
   textColor: {
     color: props =>
-      chroma(props.background).luminance() >= 0.06
+      chroma(props.background).luminance() >= 0.1
         ? "rgba(0, 0, 0, 0.6)"
         : "rgba(255, 255, 255, 0.7)"
   },
   moreBtn: {
     color: props =>
-      chroma(props.background).luminance() >= 0.06
+      chroma(props.background).luminance() >= 0.1
         ? "rgba(0, 0, 0, 0.6)"
         : "rgba(255, 255, 255, 0.7)",
     background: "rgba(255, 255, 255, 0.3)",
@@ -38,7 +37,7 @@ export default {
   },
   copyBtn: {
     color: props =>
-      chroma(props.background).luminance() >= 0.06
+      chroma(props.background).luminance() >= 0.1
         ? "rgba(0, 0, 0, 0.6)"
         : "rgba(255, 255, 255, 0.7)",
     width: "100px",
