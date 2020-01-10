@@ -95,7 +95,9 @@ class SingleColorPalette extends Component {
         <div className={classes.colors}>
           {colorBoxes}
           <div className={classes.goBack}>
-            <Link to={`/palette/${id}`}>Go Back</Link>
+            <Link to={`/palette/${id}`}>
+              <i class="fas fa-chevron-left"></i> Go Back
+            </Link>
           </div>
         </div>
         <PaletteFooter paletteName={paletteName} emoji={emoji} />
