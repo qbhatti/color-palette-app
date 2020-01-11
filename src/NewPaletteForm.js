@@ -11,8 +11,6 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
-// import List from "@material-ui/core/List";
-// import ListItem from "@material-ui/core/ListItem";
 import { ChromePicker } from "react-color";
 
 const drawerWidth = 400;
@@ -79,20 +77,35 @@ class NewPaletteForm extends Component {
 
     this.state = {
       open: true,
-      color: "308A74"
+      currentColor: "#4cad94",
+      colors: ["#4cad94", "teal", "purple"]
     };
   }
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };
+
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
 
+  updateCurrentColor = newColor => {
+    this.setState({ currentColor: newColor.hex });
+  };
+
+  addColor = () => {
+    this.setState(
+      prevSt => ({
+        colors: [...prevSt.colors, prevSt.currentColor]
+      }),
+      () => console.log(this.state.colors)
+    );
+  };
+
   render() {
     const { classes } = this.props;
-    const { open, color } = this.state;
+    const { open, currentColor } = this.state;
 
     return (
       <div className={classes.root}>
@@ -143,13 +156,16 @@ class NewPaletteForm extends Component {
             </Button>
           </div>
           <ChromePicker
-            color={color}
-            onChangeComplete={newColor => {
-              this.setState({ color: newColor.hex });
-              console.log(newColor.hex);
-            }}
+            disableAlpha
+            color={currentColor}
+            onChangeComplete={this.updateCurrentColor}
           />
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ backgroundColor: currentColor }}
+            onClick={this.addColor}
+          >
             Add Color
           </Button>
         </Drawer>
@@ -159,6 +175,12 @@ class NewPaletteForm extends Component {
           })}
         >
           <div className={classes.drawerHeader} />
+
+          <ul>
+            {this.state.colors.map(color => (
+              <li style={{ backgroundColor: color }}>{color}</li>
+            ))}
+          </ul>
         </main>
       </div>
     );
