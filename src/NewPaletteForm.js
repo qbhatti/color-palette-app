@@ -10,8 +10,12 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import Button from "@material-ui/core/Button";
+// import List from "@material-ui/core/List";
+// import ListItem from "@material-ui/core/ListItem";
+import { ChromePicker } from "react-color";
 
-const drawerWidth = 240;
+const drawerWidth = 400;
 
 const styles = theme => ({
   root: {
@@ -74,7 +78,8 @@ class NewPaletteForm extends Component {
     super(props);
 
     this.state = {
-      open: false
+      open: true,
+      color: "308A74"
     };
   }
 
@@ -87,7 +92,7 @@ class NewPaletteForm extends Component {
 
   render() {
     const { classes } = this.props;
-    const { open } = this.state;
+    const { open, color } = this.state;
 
     return (
       <div className={classes.root}>
@@ -109,7 +114,7 @@ class NewPaletteForm extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              Persistent drawer
+              Create Palette
             </Typography>
           </Toolbar>
         </AppBar>
@@ -128,6 +133,25 @@ class NewPaletteForm extends Component {
             </IconButton>
           </div>
           <Divider />
+          <Typography variant="h4">Design Your Palette</Typography>
+          <div>
+            <Button variant="contained" color="secondary">
+              Clear Palette
+            </Button>
+            <Button variant="contained" color="primary">
+              Random Color
+            </Button>
+          </div>
+          <ChromePicker
+            color={color}
+            onChangeComplete={newColor => {
+              this.setState({ color: newColor.hex });
+              console.log(newColor.hex);
+            }}
+          />
+          <Button variant="contained" color="primary">
+            Add Color
+          </Button>
         </Drawer>
         <main
           className={clsx(classes.content, {
