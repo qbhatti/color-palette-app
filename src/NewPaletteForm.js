@@ -91,29 +91,36 @@ class NewPaletteForm extends Component {
     this.state = {
       open: true,
       currentColor: "#4cad94",
-      newName: "",
+      newColorName: "",
+      newPaletteName: "",
       colors: []
     };
   }
 
   componentDidMount() {
-    ValidatorForm.addValidationRule("isNameUnique", value =>
+    ValidatorForm.addValidationRule("isColorNameUnique", value =>
       this.state.colors.every(
         ({ name }) => name.toLowerCase() !== value.toLowerCase()
       )
     );
 
-    ValidatorForm.addValidationRule("isColorUnique", () => {
-      console.log("color validated");
-      return this.state.colors.every(
+    ValidatorForm.addValidationRule("isColorUnique", () =>
+      this.state.colors.every(
         ({ color }) =>
           color.toLowerCase() !== this.state.currentColor.toLowerCase()
-      );
-    });
+      )
+    );
+
+    ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
+      this.props.palettes.every(
+        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
+      )
+    );
   }
   componentWillUnmount() {
-    ValidatorForm.removeValidationRule("isNameUnique");
+    ValidatorForm.removeValidationRule("isColorNameUnique");
     ValidatorForm.removeValidationRule("isColorUnique");
+    ValidatorForm.removeValidationRule("isPaletteNameUnique");
   }
 
   handleDrawerOpen = () => {
@@ -130,12 +137,12 @@ class NewPaletteForm extends Component {
 
   addNewColor = () => {
     const newColor = {
-      name: this.state.newName,
+      name: this.state.newColorName,
       color: this.state.currentColor
     };
     this.setState({
       colors: [...this.state.colors, newColor],
-      newName: ""
+      newColorName: ""
     });
   };
 
@@ -145,8 +152,8 @@ class NewPaletteForm extends Component {
     });
   };
 
-  handleSave = e => {
-    const paletteName = "New Test Palette";
+  handleSavePaletteSubmit = e => {
+    const paletteName = this.state.newPaletteName;
     const paletteId = paletteName.toLowerCase().replace(/ /g, "-");
     const emoji = "🎨";
 
@@ -161,7 +168,7 @@ class NewPaletteForm extends Component {
 
   render() {
     const { classes } = this.props;
-    const { open, currentColor, newName } = this.state;
+    const { open, currentColor, newColorName, newPaletteName } = this.state;
 
     return (
       <div className={classes.root}>
@@ -195,14 +202,28 @@ class NewPaletteForm extends Component {
               >
                 Go Back
               </Button>
-              <Button
-                variant="contained"
-                size="small"
-                color="primary"
-                onClick={this.handleSave}
-              >
-                Save Palette
-              </Button>
+              <ValidatorForm onSubmit={this.handleSavePaletteSubmit}>
+                <TextValidator
+                  value={newPaletteName}
+                  label="New Palette Name"
+                  name="newPaletteName"
+                  onChange={this.handleChange}
+                  validators={["required", "isPaletteNameUnique"]}
+                  errorMessages={[
+                    "Name is required",
+                    "This name already exits"
+                  ]}
+                  placeholder="Name"
+                />
+                <Button
+                  variant="contained"
+                  size="small"
+                  type="submit"
+                  color="primary"
+                >
+                  Save Palette
+                </Button>
+              </ValidatorForm>
             </div>
           </Toolbar>
         </AppBar>
@@ -237,10 +258,10 @@ class NewPaletteForm extends Component {
           />
           <ValidatorForm onSubmit={this.addNewColor}>
             <TextValidator
-              value={newName}
-              name="newName"
+              value={newColorName}
+              name="newColorName"
               onChange={this.handleChange}
-              validators={["required", "isNameUnique", "isColorUnique"]}
+              validators={["required", "isColorNameUnique", "isColorUnique"]}
               errorMessages={[
                 "Name is required",
                 "Name alreay taken",
