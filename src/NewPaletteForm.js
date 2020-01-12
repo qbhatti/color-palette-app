@@ -25,7 +25,16 @@ const styles = theme => ({
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
+    "& .btns": {
+      display: "flex",
+      justifyContent: "space-between",
+      marginLeft: "auto",
+      "& button": {
+        margin: theme.spacing(0, 0.5),
+        fontWeight: 400
+      }
+    }
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -51,6 +60,7 @@ const styles = theme => ({
   drawerHeader: {
     display: "flex",
     alignItems: "center",
+    backgroundColor: "rgba(164,162,162,0.05)",
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
     justifyContent: "flex-end"
@@ -82,13 +92,7 @@ class NewPaletteForm extends Component {
       open: true,
       currentColor: "#4cad94",
       newName: "",
-      colors: [
-        { name: "Yellow", color: "Yellow" },
-        { name: "Blue", color: "Blue" },
-        { name: "Green", color: "Green" },
-        { name: "Red", color: "Red" },
-        { name: "Teal", color: "Teal" }
-      ]
+      colors: []
     };
   }
 
@@ -141,6 +145,20 @@ class NewPaletteForm extends Component {
     });
   };
 
+  handleSave = e => {
+    const paletteName = "New Test Palette";
+    const paletteId = paletteName.toLowerCase().replace(/ /g, "-");
+    const emoji = "🎨";
+
+    const newPalette = {
+      paletteName: paletteName,
+      id: paletteId,
+      emoji: emoji,
+      colors: this.state.colors
+    };
+    this.props.savePalette(newPalette);
+  };
+
   render() {
     const { classes } = this.props;
     const { open, currentColor, newName } = this.state;
@@ -150,6 +168,7 @@ class NewPaletteForm extends Component {
         <CssBaseline />
         <AppBar
           position="fixed"
+          color="default"
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open
           })}
@@ -165,8 +184,26 @@ class NewPaletteForm extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              Create Palette
+              Create A Palette
             </Typography>
+            <div className="btns">
+              <Button
+                variant="contained"
+                href="/"
+                size="small"
+                color="secondary"
+              >
+                Go Back
+              </Button>
+              <Button
+                variant="contained"
+                size="small"
+                color="primary"
+                onClick={this.handleSave}
+              >
+                Save Palette
+              </Button>
+            </div>
           </Toolbar>
         </AppBar>
         <Drawer
