@@ -36,9 +36,9 @@ class Navbar extends Component {
 
     return (
       <header className={classes.Navbar}>
-        <div className={classes.logo}>
-          <NavLink to="/">Paletter</NavLink>
-        </div>
+        <NavLink className={classes.logo} to="/">
+          Paletteer
+        </NavLink>
         {showSlider && (
           <div>
             <span>Level: {level}</span>

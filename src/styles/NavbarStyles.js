@@ -16,10 +16,8 @@ export default {
     height: "100%",
     display: "flex",
     alignItems: "center",
-    "& a": {
-      textDecoration: "none",
-      color: "black"
-    }
+    textDecoration: "none",
+    color: "black"
   },
 
   slider: {
