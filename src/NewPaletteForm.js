@@ -95,6 +95,7 @@ class NewPaletteForm extends Component {
       newPaletteName: "",
       colors: []
     };
+    this.formRef = React.createRef();
   }
 
   componentDidMount() {
@@ -144,6 +145,7 @@ class NewPaletteForm extends Component {
       colors: [...this.state.colors, newColor],
       newColorName: ""
     });
+    this.formRef.current.resetValidations();
   };
 
   handleChange = e => {
@@ -256,7 +258,7 @@ class NewPaletteForm extends Component {
             color={currentColor}
             onChangeComplete={this.updateCurrentColor}
           />
-          <ValidatorForm onSubmit={this.addNewColor}>
+          <ValidatorForm onSubmit={this.addNewColor} ref={this.formRef}>
             <TextValidator
               value={newColorName}
               name="newColorName"
