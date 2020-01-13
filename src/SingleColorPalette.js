@@ -55,7 +55,7 @@ class SingleColorPalette extends Component {
           {colorBoxes}
           <div className={classes.goBack}>
             <Link to={`/palette/${id}`}>
-              <i class="fas fa-chevron-left"></i> Go Back
+              <i className="fas fa-chevron-left"></i> Go Back
             </Link>
           </div>
         </div>

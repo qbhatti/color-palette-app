@@ -11,11 +11,16 @@ const styles = {
     display: "inline-block",
     position: "relative",
     cursor: "pointer",
-    marginBottom: "-5.3px",
+    boxSizing: "border-box",
+    marginBottom: "-5.6px",
     textTransform: "capitalize",
     "&:hover svg": {
       color: "white",
       transform: "scale(1.3)"
+    },
+    "&:active": {
+      transform: "scale(1.1)",
+      transition: "0.2s ease-out"
     }
   },
   boxContent: {
