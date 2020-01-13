@@ -13,10 +13,21 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import { ChromePicker } from "react-color";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import DraggableColorBox from "./DraggableColorBox";
+import arrayMove from "array-move";
+import DraggableColorList from "./DraggableColorList";
 
 const drawerWidth = 400;
 
+const demoColors = [
+  { color: "red", name: "red" },
+  { color: "blue", name: "blue" },
+  { color: "green", name: "green" },
+  { color: "black", name: "black" },
+  { color: "grey", name: "grey" },
+  { color: "purple", name: "purple" },
+  { color: "teal", name: "teal" },
+  { color: "olive", name: "olive" }
+];
 const styles = theme => ({
   root: {
     display: "flex"
@@ -93,10 +104,16 @@ class NewPaletteForm extends Component {
       currentColor: "#4cad94",
       newColorName: "",
       newPaletteName: "",
-      colors: []
+      colors: [...demoColors]
     };
     this.formRef = React.createRef();
   }
+
+  onSortEnd = ({ oldIndex, newIndex }) => {
+    this.setState(({ colors }) => ({
+      colors: arrayMove(colors, oldIndex, newIndex)
+    }));
+  };
 
   componentDidMount() {
     ValidatorForm.addValidationRule("isColorNameUnique", value =>
@@ -296,14 +313,12 @@ class NewPaletteForm extends Component {
         >
           <div className={classes.drawerHeader} />
 
-          {this.state.colors.map(color => (
-            <DraggableColorBox
-              color={color.color}
-              name={color.name}
-              key={color.name}
-              handleDelete={this.handleDelete}
-            />
-          ))}
+          <DraggableColorList
+            axis="xy"
+            colors={this.state.colors}
+            handleDelete={this.handleDelete}
+            onSortEnd={this.onSortEnd}
+          />
         </main>
       </div>
     );
