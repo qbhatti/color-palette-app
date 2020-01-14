@@ -24,6 +24,7 @@ const styles = theme => ({
     }),
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     height: "64px"
   },
   appBarShift: {
@@ -37,16 +38,29 @@ const styles = theme => ({
   menuButton: {
     marginRight: theme.spacing(2)
   },
-  navBtns: {}
+  navBtns: {
+    marginRight: "1rem",
+    "& button": {
+      margin: "0 0.5rem"
+    },
+    "& a": {
+      textDecoration: "none"
+    }
+  }
 });
 
 class PaletteFormNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newPaletteName: ""
+      newPaletteName: "",
+      formShowing: false
     };
   }
+
+  showForm = () => {
+    this.setState({ formShowing: true });
+  };
 
   render() {
     const {
@@ -82,32 +96,20 @@ class PaletteFormNav extends Component {
             </Typography>
           </Toolbar>
           <div className={classes.navBtns}>
-            <PaletteMetaForm
-              palettes={palettes}
-              handleSavePaletteSubmit={handleSavePaletteSubmit}
-            />
-
-            {/* <ValidatorForm
-              onSubmit={() => handleSavePaletteSubmit(newPaletteName)}
-            >
-              <TextValidator
-                value={newPaletteName}
-                placeholder="New Palette Name"
-                name="newPaletteName"
-                onChange={this.handleChange}
-                validators={["required", "isPaletteNameUnique"]}
-                errorMessages={["Name is required", "This name already exits"]}
+            {this.state.formShowing && (
+              <PaletteMetaForm
+                palettes={palettes}
+                handleSavePaletteSubmit={handleSavePaletteSubmit}
               />
-              <Button variant="contained" type="submit" color="primary">
-                Save Palette
-              </Button>
-            </ValidatorForm>
-             */}
+            )}
             <Link to="/">
               <Button variant="contained" color="secondary">
                 Go Back
               </Button>
             </Link>
+            <Button variant="contained" color="primary" onClick={this.showForm}>
+              Save Palette
+            </Button>
           </div>
         </AppBar>
       </div>
