@@ -9,7 +9,6 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { drawerWidth } from "./NewPaletteForm";
 import PaletteMetaForm from "./PaletteMetaForm";
 
@@ -53,7 +52,6 @@ class PaletteFormNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newPaletteName: "",
       formShowing: false
     };
   }

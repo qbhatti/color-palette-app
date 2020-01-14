@@ -11,7 +11,6 @@ import arrayMove from "array-move";
 import DraggableColorList from "./DraggableColorList";
 import PaletteFormNav from "./PaletteFormNav";
 import ColorPickerForm from "./ColorPickerForm";
-import PaletteMetaForm from "./PaletteMetaForm";
 
 export const drawerWidth = 400;
 
@@ -116,16 +115,11 @@ class NewPaletteForm extends Component {
     });
   };
 
-  handleSavePaletteSubmit = paletteName => {
-    const paletteId = paletteName.toLowerCase().replace(/ /g, "-");
-    const emoji = "🎨";
+  handleSavePaletteSubmit = newPalette => {
+    newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g, "-");
+    newPalette.colors = this.state.colors;
 
-    const newPalette = {
-      paletteName: paletteName,
-      id: paletteId,
-      emoji: emoji,
-      colors: this.state.colors
-    };
+    console.log(newPalette);
     this.props.savePalette(newPalette);
   };
 
