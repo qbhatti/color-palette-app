@@ -14,10 +14,11 @@ const styles = {
     padding: "1rem",
     marginTop: "1rem",
     fontSize: "2rem",
-    display: "inline-block"
+    fontWeight: "400"
   },
   colorNameInput: {
-    width: "100%"
+    width: "100%",
+    height: "60px"
   }
 };
 
@@ -59,9 +60,11 @@ class ColorPickerForm extends Component {
   };
 
   updateCurrentColor = newColor => {
-    this.setState({ currentColor: newColor.hex });
-    this.formRef.current.resetValidations();
-    this.formRef.current.isFormValid();
+    this.setState({ currentColor: newColor.hex }, () => {
+      this.formRef.current
+        .isFormValid()
+        .then(() => this.formRef.current.resetValidations());
+    });
   };
 
   handleSubmit = () => {
@@ -69,7 +72,7 @@ class ColorPickerForm extends Component {
       name: this.state.newColorName,
       color: this.state.currentColor
     };
-    console.log(this.formRef.current);
+
     this.props.addNewColor(newColor);
     this.setState({ newColorName: "" }, () =>
       this.formRef.current.resetValidations()

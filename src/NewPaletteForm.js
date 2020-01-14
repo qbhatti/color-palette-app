@@ -75,10 +75,11 @@ const styles = theme => ({
   },
   buttons: {
     width: "100%",
-    "& button": {
+    "& $btn": {
       width: "50%"
     }
-  }
+  },
+  btn: {}
 });
 
 class NewPaletteForm extends Component {
@@ -208,6 +209,7 @@ class NewPaletteForm extends Component {
             <div className={classes.buttons}>
               <Button
                 variant="contained"
+                className={classes.btn}
                 color="secondary"
                 onClick={this.handleClearPalette}
               >
@@ -215,6 +217,7 @@ class NewPaletteForm extends Component {
               </Button>
               <Button
                 variant="contained"
+                className={classes.btn}
                 color="primary"
                 disabled={paletteIsFull}
                 onClick={this.handleRandomColor}
