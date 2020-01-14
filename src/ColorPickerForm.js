@@ -1,7 +1,25 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
 import { ChromePicker } from "react-color";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+
+const styles = {
+  picker: {
+    width: "100% !important",
+    marginTop: "2rem"
+  },
+  addColorBtn: {
+    width: "100%",
+    padding: "1rem",
+    marginTop: "1rem",
+    fontSize: "2rem",
+    display: "inline-block"
+  },
+  colorNameInput: {
+    width: "100%"
+  }
+};
 
 class ColorPickerForm extends Component {
   constructor(props) {
@@ -42,6 +60,8 @@ class ColorPickerForm extends Component {
 
   updateCurrentColor = newColor => {
     this.setState({ currentColor: newColor.hex });
+    this.formRef.current.resetValidations();
+    this.formRef.current.isFormValid();
   };
 
   handleSubmit = () => {
@@ -49,7 +69,7 @@ class ColorPickerForm extends Component {
       name: this.state.newColorName,
       color: this.state.currentColor
     };
-
+    console.log(this.formRef.current);
     this.props.addNewColor(newColor);
     this.setState({ newColorName: "" }, () =>
       this.formRef.current.resetValidations()
@@ -58,19 +78,23 @@ class ColorPickerForm extends Component {
 
   render() {
     const { currentColor, newColorName } = this.state;
-    const { paletteIsFull } = this.props;
+    const { paletteIsFull, classes } = this.props;
     return (
       <div>
         <ChromePicker
           disableAlpha
           color={currentColor}
           onChangeComplete={this.updateCurrentColor}
+          className={classes.picker}
         />
 
         <ValidatorForm onSubmit={this.handleSubmit} ref={this.formRef}>
           <TextValidator
             value={newColorName}
+            variant="filled"
+            margin="normal"
             name="newColorName"
+            className={classes.colorNameInput}
             onChange={this.handleChange}
             validators={["required", "isColorNameUnique", "isColorUnique"]}
             errorMessages={[
@@ -85,6 +109,7 @@ class ColorPickerForm extends Component {
             type="submit"
             color="primary"
             disabled={paletteIsFull}
+            className={classes.addColorBtn}
             style={{
               backgroundColor: paletteIsFull
                 ? "rgba(0, 0, 0, 0.12)"
@@ -98,4 +123,4 @@ class ColorPickerForm extends Component {
     );
   }
 }
-export default ColorPickerForm;
+export default withStyles(styles)(ColorPickerForm);
