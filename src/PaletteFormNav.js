@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { drawerWidth } from "./NewPaletteForm";
+import PaletteMetaForm from "./PaletteMetaForm";
 
 const styles = theme => ({
   root: {
@@ -47,33 +48,15 @@ class PaletteFormNav extends Component {
     };
   }
 
-  componentDidMount() {
-    ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
-      this.props.palettes.every(
-        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
-      )
-    );
-  }
-
-  componentWillUnmount() {
-    ValidatorForm.removeValidationRule("isPaletteNameUnique");
-  }
-
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
   render() {
     const {
       open,
       classes,
       handleDrawerOpen,
-      handleSavePaletteSubmit
+      handleSavePaletteSubmit,
+      palettes
     } = this.props;
 
-    const { newPaletteName } = this.state;
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -99,7 +82,12 @@ class PaletteFormNav extends Component {
             </Typography>
           </Toolbar>
           <div className={classes.navBtns}>
-            <ValidatorForm
+            <PaletteMetaForm
+              palettes={palettes}
+              handleSavePaletteSubmit={handleSavePaletteSubmit}
+            />
+
+            {/* <ValidatorForm
               onSubmit={() => handleSavePaletteSubmit(newPaletteName)}
             >
               <TextValidator
@@ -114,6 +102,7 @@ class PaletteFormNav extends Component {
                 Save Palette
               </Button>
             </ValidatorForm>
+             */}
             <Link to="/">
               <Button variant="contained" color="secondary">
                 Go Back

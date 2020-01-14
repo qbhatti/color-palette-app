@@ -11,6 +11,7 @@ import arrayMove from "array-move";
 import DraggableColorList from "./DraggableColorList";
 import PaletteFormNav from "./PaletteFormNav";
 import ColorPickerForm from "./ColorPickerForm";
+import PaletteMetaForm from "./PaletteMetaForm";
 
 export const drawerWidth = 400;
 
