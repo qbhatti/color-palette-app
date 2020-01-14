@@ -38,7 +38,12 @@ class PaletteFormNav extends Component {
   };
 
   render() {
-    const { open, classes, handleDrawerOpen, savePaletteSubmit } = this.props;
+    const {
+      open,
+      classes,
+      handleDrawerOpen,
+      handleSavePaletteSubmit
+    } = this.props;
 
     const { newPaletteName } = this.state;
     return (
@@ -70,7 +75,9 @@ class PaletteFormNav extends Component {
                   Go Back
                 </Button>
               </Link>
-              <ValidatorForm onSubmit={() => savePaletteSubmit(newPaletteName)}>
+              <ValidatorForm
+                onSubmit={() => handleSavePaletteSubmit(newPaletteName)}
+              >
                 <TextValidator
                   value={newPaletteName}
                   label="New Palette Name"
