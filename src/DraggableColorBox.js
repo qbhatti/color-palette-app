@@ -12,7 +12,7 @@ const styles = {
     position: "relative",
     cursor: "pointer",
     boxSizing: "border-box",
-    marginBottom: "-5.6px",
+    marginBottom: "-6px",
     textTransform: "capitalize",
     "&:hover svg": {
       color: "white",
