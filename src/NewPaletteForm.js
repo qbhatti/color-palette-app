@@ -12,7 +12,7 @@ import DraggableColorList from "./DraggableColorList";
 import PaletteFormNav from "./PaletteFormNav";
 import ColorPickerForm from "./ColorPickerForm";
 
-const drawerWidth = 400;
+export const drawerWidth = 400;
 
 const demoColors = [
   { color: "red", name: "red" },
@@ -28,35 +28,7 @@ const styles = theme => ({
   root: {
     display: "flex"
   },
-  appBar: {
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    "& .btns": {
-      display: "flex",
-      justifyContent: "space-between",
-      marginLeft: "auto",
-      "& button": {
-        margin: theme.spacing(0, 0.5),
-        fontWeight: 400
-      },
-      "& a": {
-        textDecoration: "none"
-      }
-    }
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  menuButton: {
-    marginRight: theme.spacing(2)
-  },
+
   hide: {
     display: "none"
   },
@@ -194,8 +166,8 @@ class NewPaletteForm extends Component {
       <div className={classes.root}>
         <PaletteFormNav
           open={open}
-          classes={classes}
           palettes={palettes}
+          drawerWidth={drawerWidth}
           handleDrawerOpen={this.handleDrawerOpen}
           handleSavePaletteSubmit={this.handleSavePaletteSubmit}
         />
