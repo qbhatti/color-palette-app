@@ -47,7 +47,7 @@ class PaletteFormNav extends Component {
             [classes.appBarShift]: open
           })}
         >
-          <Toolbar>
+          <Toolbar className={classes.toolbar}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -78,7 +78,7 @@ class PaletteFormNav extends Component {
               </Button>
             </Link>
             <Button variant="contained" color="primary" onClick={this.showForm}>
-              Save Palette
+              Save
             </Button>
           </div>
         </AppBar>
