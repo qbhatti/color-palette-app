@@ -1,10 +1,14 @@
+import sizes from "./sizes";
+
 export default {
   Palette: {
     height: "100vh",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    overflow: "hidden"
   },
   colors: {
+    fontSize: 0,
     height: "90%"
   },
   goBack: {
@@ -13,7 +17,6 @@ export default {
     margin: "0",
     display: "inline-block",
     position: "relative",
-    marginBottom: "-4px",
     opacity: "1",
     backgroundColor: "black",
     "& a": {
@@ -35,6 +38,18 @@ export default {
       border: "none",
       cursor: "pointer",
       textDecoration: "none"
+    },
+    [sizes.down("lg")]: {
+      width: "75%",
+      height: "33.333%"
+    },
+    [sizes.down("md")]: {
+      width: "50%",
+      height: "20%"
+    },
+    [sizes.down("xs")]: {
+      width: "100%",
+      height: "10%"
     }
   }
 };

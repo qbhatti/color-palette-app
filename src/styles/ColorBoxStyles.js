@@ -9,7 +9,7 @@ export default {
     display: "inline-block",
     position: "relative",
     cursor: "pointer",
-    marginBottom: "-6px",
+    //marginBottom: "-4px",
     "&:hover button": {
       opacity: "1"
     },
@@ -45,8 +45,12 @@ export default {
     width: "60px",
     height: "30px",
     textAlign: "center",
+    fontSize: "1rem",
     lineHeight: "30px",
-    textTransform: "uppercase"
+    textTransform: "uppercase",
+    [sizes.down("xs")]: {
+      fontSize: "0.75rem"
+    }
   },
   copyBtn: {
     color: props =>
@@ -128,6 +132,9 @@ export default {
       fontSize: "2rem",
       fontWeight: "100",
       opacity: "0.8"
+    },
+    [sizes.down("xs")]: {
+      fontSize: "3rem"
     }
   },
   showMsg: {
