@@ -88,10 +88,10 @@ class NewPaletteForm extends Component {
   };
 
   isColorUnique = colorPicked => {
-    return this.state.colors.every(
+    return !this.state.colors.some(
       color =>
-        color.name.toLowerCase() !== colorPicked.name.toLowerCase() &&
-        color.color.toLowerCase() !== colorPicked.color.toLowerCase()
+        color.name.toLowerCase() === colorPicked.name.toLowerCase() &&
+        color.color.toLowerCase() === colorPicked.color.toLowerCase()
     );
   };
 
