@@ -37,6 +37,8 @@ class PaletteFormNav extends Component {
       palettes
     } = this.props;
 
+    const { formShowing } = this.state;
+
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -69,7 +71,7 @@ class PaletteFormNav extends Component {
                 palettes={palettes}
                 handleSavePaletteSubmit={handleSavePaletteSubmit}
                 hideForm={this.hideForm}
-                formShowing={this.state.formShowing}
+                formShowing={formShowing}
               />
             )}
             <Link to="/">
