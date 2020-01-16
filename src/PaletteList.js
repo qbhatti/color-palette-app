@@ -6,9 +6,9 @@ import styles from "./styles/PaletteListStyles";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 class PaletteList extends Component {
-  goToPalette(id) {
+  goToPalette = id => {
     this.props.history.push(`/palette/${id}`);
-  }
+  };
 
   render() {
     const { palettes, classes, deletePalette } = this.props;
@@ -25,7 +25,7 @@ class PaletteList extends Component {
                 <MiniPalette
                   {...palette}
                   deletePalette={deletePalette}
-                  handleClick={() => this.goToPalette(palette.id)}
+                  goToPalette={this.goToPalette}
                   key={palette.id}
                 />
               </CSSTransition>
