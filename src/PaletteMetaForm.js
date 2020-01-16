@@ -47,6 +47,7 @@ class PaletteMetaForm extends Component {
       emoji: emoji.native
     };
     this.props.handleSavePaletteSubmit(newPalette);
+    this.setState({ showEmojiDialog: false });
   };
   render() {
     const { hideForm } = this.props;
