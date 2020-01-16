@@ -28,14 +28,6 @@ class PaletteMetaForm extends Component {
     ValidatorForm.removeValidationRule("isPaletteNameUnique");
   }
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
