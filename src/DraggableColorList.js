@@ -14,6 +14,7 @@ const DraggableColorList = SortableContainer(props => {
           key={color.name}
           handleDelete={handleDelete}
           onSortEnd={onSortEnd}
+          distance={15}
         />
       ))}
     </div>
